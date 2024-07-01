@@ -1,0 +1,14 @@
+micronaut:
+    application:
+        name: service-a
+tracing:
+    jaeger:
+        enabled: true
+        reporter:
+            log-spans: true
+        sampler:
+            probability: 1.0
+        service-name: my-micronaut-app
+        udp-sender:
+            hostname: localhost
+            port: 6831
