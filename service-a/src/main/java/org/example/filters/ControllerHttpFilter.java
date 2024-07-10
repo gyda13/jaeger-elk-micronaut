@@ -6,7 +6,6 @@ import io.micronaut.http.MutableHttpResponse;
 import io.micronaut.http.annotation.Filter;
 import io.micronaut.http.filter.HttpServerFilter;
 import io.micronaut.http.filter.ServerFilterChain;
-import io.opentracing.Tracer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.reactivestreams.Publisher;
@@ -21,13 +20,11 @@ public class ControllerHttpFilter implements HttpServerFilter {
 
     public static final String X_CORRELATION_ID = "X-Correlation-ID";
 
-    private final Tracer tracer;
-
     @Override
     public Publisher<MutableHttpResponse<?>> doFilter(HttpRequest<?> request, ServerFilterChain chain) {
         String correlationId = request.getHeaders().contains(X_CORRELATION_ID) ? request.getHeaders()
                 .get(X_CORRELATION_ID) : UUID.randomUUID().toString();
-        MDC.put("trace", correlationId);
+        MDC.put("correlationId", correlationId);
 
         MutableHttpRequest<?> mutableRequest = request.mutate();
 
