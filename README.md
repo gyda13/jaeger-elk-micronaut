@@ -1,25 +1,15 @@
-# jaeger-micronaut
+# jaeger-elasticsearch-micronaut
 
 
-This repository contains two microservices: Service A and Service B. Service A communicates with Service B to handle specific operations. I used Jaeger for distributed tracing to monitor and analyze the interactions between these services.
+This repository is designed for the article available at [Enhanced Logging and Tracing in Micronaut Microservices](https://medium.com/@gydamohaimeed/enhanced-logging-and-tracing-in-micronaut-microservices-ae5af7d68c06). For detailed explanations and context, please refer to the article.
 
 
-## Run Jaeger in Docker
-To run Jaeger in a Docker container, use the following command:
+### Before Running the Application
 
+ **Run Docker Compose**: Navigate to the project directory in the terminal. Then, execute the following command:
 ```
-docker run -d --name jaeger \
-  -e COLLECTOR_ZIPKIN_HTTP_PORT=9411 \
-  -p 5775:5775/udp \
-  -p 6831:6831/udp \
-  -p 6832:6832/udp \
-  -p 5778:5778 \
-  -p 16686:16686 \
-  -p 14268:14268 \
-  -p 14250:14250 \
-  -p 9411:9411 \
-  jaegertracing/all-in-one:1.30
+docker compose up -d
 ```
 
+![image](https://github.com/user-attachments/assets/fc9dbee6-117e-4936-a74c-fa2c6c7999c8)
 
-<img width="1728" alt="Screenshot 1445-12-25 at 2 32 19 PM" src="https://github.com/gyda13/jaeger-micronaut/assets/90142160/7ac2f47e-746e-4f38-aab3-6e889fc6032d">
