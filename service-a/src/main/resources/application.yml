@@ -8,7 +8,7 @@ tracing:
             log-spans: true
         sampler:
             probability: 1.0
-        service-name: my-micronaut-app
+        service-name: service-a
         udp-sender:
             hostname: localhost
             port: 6831

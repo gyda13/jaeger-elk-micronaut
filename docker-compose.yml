@@ -13,19 +13,16 @@ services:
       interval: 10s
       timeout: 10s
       retries: 3
-    networks:
-      - elastic
   logstash:
     image: docker.elastic.co/logstash/logstash:8.8.2
     container_name: logstash
     volumes:
-      - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+      - ./logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
     ports:
       - "5044:5044"
-    networks:
-      - elastic
     depends_on:
-      - elasticsearch
+      elasticsearch:
+        condition: service_healthy
   jaeger:
     image: jaegertracing/all-in-one
     container_name: jaeger
@@ -41,19 +38,14 @@ services:
       - "14268:14268"
       - "14250:14250"
       - "9411:9411"
-    networks:
-      - elastic
     depends_on:
-      - elasticsearch
+      elasticsearch:
+        condition: service_healthy
   kibana:
     image: kibana:7.16.1
     container_name: kibana
     ports:
       - "5601:5601"
     depends_on:
-      - elasticsearch
-    networks:
-      - elastic
-networks:
-  elastic:
-    driver: bridge
+      elasticsearch:
+        condition: service_healthy
